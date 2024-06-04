@@ -4,12 +4,19 @@ const sqldb = require('./connection/database');
 const app = express();
 
 function getPerson() {
-  sqldb.execute('SELECT * FROM person').then((result) => {
+  sqldb.execute('SELECT * FROM person').then(([rows,fileData]) => {
+    console.log(rows);
+  });
+}
+function insert(){
+  const query = 'INSERT INTO person (full_name,age,city,gender) VALUES (?,?,?,?)';
+  const values = ["raman",32,"ambala","male"];
+  sqldb.execute(query,values).then((result) =>{
     console.log(result);
   });
 }
-
-getPerson();
+insert();
+//getPerson();
 
 app.use((req, res, next) => {
   res.write('<h1>Hello guys!</h1>');
