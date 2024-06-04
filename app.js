@@ -15,9 +15,14 @@ function insert(){
     console.log(result);
   });
 }
-insert();
+function findById(id){
+  sqldb.execute('SELECT *  FROM person WHERE person.id = ?',[id]).then(([row,fileData]) =>{
+    console.log(row);
+  }).catch((err) => console.log(err));
+}
+//insert();
 //getPerson();
-
+findById(2);
 app.use((req, res, next) => {
   res.write('<h1>Hello guys!</h1>');
 });
