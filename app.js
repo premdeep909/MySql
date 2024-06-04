@@ -16,13 +16,20 @@ function insert(){
   });
 }
 function findById(id){
-  sqldb.execute('SELECT *  FROM person WHERE person.id = ?',[id]).then(([row,fileData]) =>{
+  sqldb.execute('SELECT * FROM person WHERE person.id = ?',[id]).then(([row,fileData]) =>{
+    console.log(row);
+  }).catch((err) => console.log(err));
+}
+
+function deleteById(id){
+  sqldb.execute('DELETE FROM person WHERE person.id = ?',[id]).then(([row,fileData]) =>{
     console.log(row);
   }).catch((err) => console.log(err));
 }
 //insert();
 //getPerson();
-findById(2);
+//findById(2);
+deleteById(3);
 app.use((req, res, next) => {
   res.write('<h1>Hello guys!</h1>');
 });
